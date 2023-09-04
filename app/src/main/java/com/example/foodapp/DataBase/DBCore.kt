@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.foodapp.Models.DBModel
 
-@Database(entities = [DBModel::class], version = 2)
+@Database(entities = [DBModel::class], version = 3)
 abstract class DBCore:RoomDatabase() {
 
     abstract fun getDao():DBInterface

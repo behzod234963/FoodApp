@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class DBModel(
     @PrimaryKey(autoGenerate = true)
     val id :Int?=null,
-    val name:String,
-    val materials:String,
-    val process:String)
+    val name:String?=null,
+    val materials:String?=null,
+    val process:String?=null)
