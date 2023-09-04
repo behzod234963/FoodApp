@@ -13,41 +13,45 @@ import com.example.foodapp.Constants.MAIN
 import com.example.foodapp.DataBase.FoodsRepository
 import com.example.foodapp.Models.DBModel
 import com.example.foodapp.R
+import com.example.foodapp.databinding.FragmentMenuBinding
 
 class Menu : Fragment() {
 
+    private lateinit var binding: FragmentMenuBinding
+    private lateinit var list:ArrayList<DBModel>
+    private lateinit var adapter: FoodListAdapter
+    private lateinit var repository: FoodsRepository
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val views= inflater.inflate(R.layout.fragment_menu,container,false)
+    ): View {
+        binding= FragmentMenuBinding.inflate(layoutInflater,container,false)
+        return binding.root
+    }
 
-        val rvMenu:RecyclerView?=views?.findViewById(R.id.rvFoodList)
-        rvMenu?.layoutManager=LinearLayoutManager(requireContext())
-        rvMenu?.adapter=FoodListAdapter()
-        val list:ArrayList<DBModel>
-        val foodAdapter=FoodListAdapter()
-        val foodsRepository= FoodsRepository(requireActivity().application)
-        list=foodsRepository.getAllFood() as ArrayList<DBModel>
-        foodAdapter.submitList(list)
-        val btnClose:Button=views.findViewById(R.id.btnCancel_fr)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val bundle=Bundle()
+        initView()
+        loadlist()
 
-        foodAdapter.onClick={
+    }
 
-            val frDetails=Details()
-            val id = list[it].id
-            bundle.putInt("id",id!!)
-            frDetails.arguments= Bundle()
-            MAIN.navController.navigate(R.id.action_menu_to_details)
+    private fun loadlist() {
 
-        }
-        btnClose.setOnClickListener {
+        list=ArrayList()
+        list=repository.getAllFood() as ArrayList<DBModel>
 
-            MAIN.navController.navigate(R.id.action_menu_to_mainFragment)
+    }
 
-        }
+    private fun initView() {
 
-        return views
+        list= ArrayList()
+        adapter=FoodListAdapter()
+        repository=FoodsRepository(requireActivity().application)
+        binding.rvFoodList.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+        binding.rvFoodList.adapter=adapter
+        adapter.submitList(list)
+        adapter.notifyDataSetChanged()
 
     }
 

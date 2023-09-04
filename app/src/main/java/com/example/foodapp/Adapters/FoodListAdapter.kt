@@ -7,13 +7,20 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodapp.Models.DBModel
-import com.example.foodapp.Models.FoodListModel
 import com.example.foodapp.R
 
-class FoodListAdapter() :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>() {
+class FoodListAdapter :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>() {
 
-
+    var onClick:((Int)->Unit)?=null
     var list: ArrayList<DBModel> = ArrayList()
+
+        set(value){
+
+            field=value
+            notifyDataSetChanged()
+
+        }
+
     fun submitList(list: ArrayList<DBModel>){
 
         this.list=list
@@ -23,11 +30,10 @@ class FoodListAdapter() :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder
 
     }
 
-    var onClick:((Int)->Unit)?=null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodListViewHolder {
 
-        return FoodListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_food_list,parent,false))
+        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_food_list,parent,false)
+        return FoodListViewHolder(view)
 
     }
 
