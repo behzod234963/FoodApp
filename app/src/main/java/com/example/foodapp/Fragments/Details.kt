@@ -14,7 +14,6 @@ class Details : Fragment() {
 
     lateinit var binding: FragmentDetailsBinding
     lateinit var foodsRepository: FoodsRepository
-    lateinit var list:ArrayList<DBModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,14 +33,9 @@ class Details : Fragment() {
     private fun initView() {
 
         foodsRepository= FoodsRepository(requireActivity().application)
-        list=ArrayList()
-        val id = arguments?.getInt("id")
+        val getId=arguments?.getInt("id")
 
-        binding.tvNameDetails.text.let {
-            if (id != null) {
-                foodsRepository.getFoodByID(id).toString()
-            }
-        }
+        binding.tvNameDetails.text= getId?.let { foodsRepository.getAllFood().toString() }
 
     }
 

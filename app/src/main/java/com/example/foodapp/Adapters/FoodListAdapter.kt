@@ -1,5 +1,6 @@
 package com.example.foodapp.Adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foodapp.Models.DBModel
 import com.example.foodapp.R
 
-class FoodListAdapter :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>() {
+class FoodListAdapter(list: ArrayList<DBModel>, requireContext: Context) :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>() {
     var onClick:((Int)->Unit)?=null
     var list: ArrayList<DBModel> =ArrayList()
         set(value){
@@ -17,7 +18,7 @@ class FoodListAdapter :RecyclerView.Adapter<FoodListAdapter.FoodListViewHolder>(
             notifyDataSetChanged()
         }
     fun submitList(list: ArrayList<DBModel>){
-        this.list=list
+
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()

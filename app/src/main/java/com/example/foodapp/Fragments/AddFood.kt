@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import com.example.foodapp.Constants.MAIN
+import androidx.navigation.fragment.findNavController
 import com.example.foodapp.DataBase.FoodsRepository
 import com.example.foodapp.Models.DBModel
 import com.example.foodapp.R
@@ -40,7 +40,7 @@ class AddFood : Fragment() {
         foodsRepository=FoodsRepository(requireActivity().application)
         binding.btnCancelFr.setOnClickListener {
 
-            MAIN.navController.navigate(R.id.action_addFood_to_mainFragment)
+            findNavController().navigate(R.id.action_addFood_to_mainFragment)
 
         }
         binding.btnSaveFrAdd.setOnClickListener {
@@ -51,7 +51,7 @@ class AddFood : Fragment() {
                 binding.etNProductsFrAdd.text.toString(),
                 binding.etMoPFrAdd.text.toString())
             )
-            MAIN.navController.navigate(R.id.action_addFood_to_mainFragment)
+            findNavController().navigate(R.id.action_addFood_to_mainFragment)
 
         }
 

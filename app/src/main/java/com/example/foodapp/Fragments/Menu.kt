@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.foodapp.Adapters.FoodListAdapter
-import com.example.foodapp.Constants.MAIN
 import com.example.foodapp.DataBase.FoodsRepository
 import com.example.foodapp.Models.DBModel
 import com.example.foodapp.R
@@ -35,12 +33,26 @@ class Menu : Fragment() {
         initView()
     }
     private fun initView() {
-        adapter = FoodListAdapter()
-        repository = FoodsRepository(requireActivity().application)
         binding.rvFoodList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        adapter = FoodListAdapter(list,requireContext())
         binding.rvFoodList.adapter = adapter
+        repository = FoodsRepository(requireActivity().application)
         adapter.submitList(list)
+
+        adapter.onClick={
+
+            val details=Details()
+            val bundle=Bundle()
+            val id = list[it].id
+            if (id != null) {
+                bundle.putInt("id",id)
+            }
+            details.arguments=bundle
+            findNavController().navigate(R.id.action_menu_to_details)
+
+        }
+
     }
 
 }

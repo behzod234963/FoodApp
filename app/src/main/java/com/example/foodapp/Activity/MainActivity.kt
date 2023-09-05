@@ -12,7 +12,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.example.foodapp.Constants.MAIN
 import com.example.foodapp.Fragments.AddFood
 import com.example.foodapp.Fragments.MainFragment
 import com.example.foodapp.Fragments.Menu
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
 
-        MAIN=this
         val navHost=supportFragmentManager.findFragmentById(R.id.nhNavHost) as NavHost
         navController=navHost.navController
         navController

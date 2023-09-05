@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.example.foodapp.Constants.MAIN
+import androidx.navigation.fragment.findNavController
 import com.example.foodapp.R
 import com.example.foodapp.databinding.FragmentMainBinding
 
@@ -33,12 +33,12 @@ class MainFragment : Fragment() {
 
         binding.btnAddMain.setOnClickListener {
 
-            MAIN.navController.navigate(R.id.action_mainFragment_to_addFood)
+            findNavController().navigate(R.id.action_mainFragment_to_menu)
 
         }
         binding.btnMenuMain.setOnClickListener {
 
-            MAIN.navController.navigate(R.id.action_mainFragment_to_menu)
+            findNavController().navigate(R.id.action_mainFragment_to_menu)
 
         }
 
