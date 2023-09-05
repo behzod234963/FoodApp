@@ -26,22 +26,21 @@ class Menu : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         loadlist()
     }
     private fun loadlist() {
         list = ArrayList()
+        repository=FoodsRepository(requireActivity().application)
         list = repository.getAllFood() as ArrayList<DBModel>
+        initView()
     }
     private fun initView() {
-        list = ArrayList()
         adapter = FoodListAdapter()
         repository = FoodsRepository(requireActivity().application)
         binding.rvFoodList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvFoodList.adapter = adapter
         adapter.submitList(list)
-        adapter.notifyDataSetChanged()
     }
 
 }
