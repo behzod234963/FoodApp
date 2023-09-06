@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
 
         binding.btnAddMain.setOnClickListener {
 
-            findNavController().navigate(R.id.action_mainFragment_to_menu)
+            findNavController().navigate(R.id.action_mainFragment_to_addFood)
 
         }
         binding.btnMenuMain.setOnClickListener {

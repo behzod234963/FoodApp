@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import com.example.foodapp.DataBase.FoodsRepository
 import com.example.foodapp.Models.DBModel
 import com.example.foodapp.R
@@ -12,7 +14,9 @@ import com.example.foodapp.databinding.FragmentDetailsBinding
 
 class Details : Fragment() {
 
+    val args:DetailsArgs by navArgs()
     lateinit var binding: FragmentDetailsBinding
+    var userId=1
     lateinit var foodsRepository: FoodsRepository
 
     override fun onCreateView(
@@ -32,10 +36,9 @@ class Details : Fragment() {
 
     private fun initView() {
 
+        userId=args.id
         foodsRepository= FoodsRepository(requireActivity().application)
-        val getId=arguments?.getInt("id")
-
-        binding.tvNameDetails.text= getId?.let { foodsRepository.getAllFood().toString() }
+        binding.tvNameDetails.text=foodsRepository.getFoodByID(userId).toString()
 
     }
 

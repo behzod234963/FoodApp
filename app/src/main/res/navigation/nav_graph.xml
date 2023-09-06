@@ -37,6 +37,10 @@
         <action
             android:id="@+id/action_menu_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="Args"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
     <fragment
         android:id="@+id/details"
@@ -46,5 +50,9 @@
         <action
             android:id="@+id/action_details_to_menu"
             app:destination="@id/menu" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 </navigation>

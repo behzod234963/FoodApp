@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodapp.Adapters.FoodListAdapter
@@ -40,16 +41,9 @@ class Menu : Fragment() {
         repository = FoodsRepository(requireActivity().application)
         adapter.submitList(list)
 
-        adapter.onClick={
+        adapter.onClick={position->
 
-            val details=Details()
-            val bundle=Bundle()
-            val id = list[it].id
-            if (id != null) {
-                bundle.putInt("id",id)
-            }
-            details.arguments=bundle
-            findNavController().navigate(R.id.action_menu_to_details)
+            findNavController().navigate(R.id.action_menu_to_details, bundleOf("id" to list[position].id))
 
         }
 
